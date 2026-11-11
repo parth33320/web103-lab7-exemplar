@@ -98,8 +98,8 @@ const createTripsUsersTable = async () => {
     `
 
     try {
-        const res = await pool.query(createTripsUsersTableQuery)
-        console.log('🎉 trips_users table created successfully')
+        const res = await pool.query(createTripsTableQuery)
+        console.log('🎉 trips table dropped and recreated successfully')
     } catch (err) {
         console.error('⚠️ error creating trips_users table', err)
     }
@@ -125,7 +125,9 @@ const createUsersTripsTable = async () => {
 
 const createTripsTable = async () => {
     const createTripsTableQuery = `
-        CREATE TABLE IF NOT EXISTS trips (
+        DROP TABLE IF EXISTS trips CASCADE;
+
+        CREATE TABLE trips (
             id serial PRIMARY KEY,
             title varchar(100) NOT NULL,
             description varchar(500) NOT NULL,
