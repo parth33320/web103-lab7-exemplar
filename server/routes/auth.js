@@ -42,4 +42,16 @@ router.get('/github/callback', passport.authenticate('github', {
     })
 )
 
+router.get('/github', passport.authenticate('github', { scope: [ 'read:user' ] }))
+
+const CLIENT_URL = process.env.NODE_ENV === 'production'
+    ? 'https://client-4d30.onrender.com'
+    : 'http://localhost:5173'
+
+router.get('/github/callback', passport.authenticate('github', {
+        successRedirect: `${CLIENT_URL}/`,
+        failureRedirect: `${CLIENT_URL}/destinations`,
+    })
+)
+
 export default router
