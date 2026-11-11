@@ -82,7 +82,7 @@ const createUsersTable = async () => {
 
     try {
         const res = await pool.query(createUsersTableQuery)
-        console.log('🎉 users table created successfully')
+        console.log('🎉 users table dropped and recreated successfully')
     } catch (err) {
         console.error('⚠️ error creating users table', err)
     }
