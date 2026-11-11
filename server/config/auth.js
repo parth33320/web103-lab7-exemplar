@@ -1,10 +1,14 @@
 import GitHubStrategy from 'passport-github2'
 import { pool } from '../config/database.js'
 
+const callbackURL = process.env.NODE_ENV === 'production'
+    ? 'https://server-3fmz.onrender.com/auth/github/callback'
+    : 'http://localhost:3001/auth/github/callback'
+
 const options = {
     clientID: process.env.GITHUB_CLIENT_ID,
     clientSecret: process.env.GITHUB_CLIENT_SECRET,
-    callbackURL: 'http://localhost:3001/auth/github/callback'
+    callbackURL: callbackURL
 }
 
 const verify = async (accessToken, refreshToken, profile, callback)  => {
