@@ -69,9 +69,11 @@ const createTripsDestinationsTable = async () => {
 
 const createUsersTable = async () => {
     const createUsersTableQuery = `
-        CREATE TABLE IF NOT EXISTS users (
+        DROP TABLE IF EXISTS users CASCADE;
+
+        CREATE TABLE users (
             id serial PRIMARY KEY,
-            githubid integer NOT NULL,
+            githubid varchar(100) NOT NULL,
             username varchar(100) NOT NULL,
             avatarurl varchar(500) NOT NULL,
             accesstoken varchar(500) NOT NULL
