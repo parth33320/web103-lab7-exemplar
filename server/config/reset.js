@@ -176,10 +176,15 @@ const seedTripsTable = async () => {
     })
 }
 
-seedTripsTable()
-createActivitiesTable()
-createDestinationsTable()
-createTripsDestinationsTable()
-createUsersTable()
-createTripsUsersTable()
-createUsersTripsTable()
+const setupDatabase = async () => {
+    await seedTripsTable()
+    await createActivitiesTable()
+    await createDestinationsTable()
+    await createTripsDestinationsTable()
+    await createUsersTable()
+    await createTripsUsersTable()
+    await createUsersTripsTable()
+    console.log('🏁 All tables seeded and created successfully!')
+}
+
+setupDatabase()
