@@ -15,16 +15,28 @@ import authRoutes from './routes/auth.js'
 // create express app
 const app = express()
 
+// Add this line so Render handles secure cookies properly behind the proxy
+app.set('trust proxy', 1)
+
 app.use(session({
     secret: 'codepath',
     resave: false,
-    saveUninitialized: true
- }))
+    saveUninitialized: true, // <-- Add comma here!
+    cookie: {
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax'
+    }
+}))
 
 // middleware
 app.use(express.json())
+
+const FRONTEND_URL = process.env.NODE_ENV === 'production'
+    ? 'https://client-4d30.onrender.com'
+    : 'http://localhost:5173'
+
 app.use(cors({
-    origin: 'http://localhost:5173',
+    origin: FRONTEND_URL,
     methods: 'GET,POST,PUT,DELETE,PATCH',
     credentials: true
   }
