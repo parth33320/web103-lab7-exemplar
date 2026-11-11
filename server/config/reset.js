@@ -98,8 +98,8 @@ const createTripsUsersTable = async () => {
     `
 
     try {
-        const res = await pool.query(createTripsTableQuery)
-        console.log('🎉 trips table dropped and recreated successfully')
+        const res = await pool.query(createTripsUsersTableQuery)
+        console.log('🎉 trips_users table created successfully')
     } catch (err) {
         console.error('⚠️ error creating trips_users table', err)
     }
